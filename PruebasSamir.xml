@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="pruebas.samir" default="ini" basedir=".">
+
+	<property file=".\Ant_ExtractDesdeGit.properties" />
+	<property environment="env"/>
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="./lib/ant-contrib-0.6.jar" />
+		</classpath>
+	</taskdef>
+	
+	<property name="git.username" value="sobiolsa"/>
+	<property name="git.password" value="gitSamir9"/>
+	<property name="git.old.folder.prueba" value="C:\Users\xIS12157.SCISB\git_pruebas_old"/>
+	<property name="git.new.folder.prueba" value="C:\Users\xIS12157.SCISB\git_pruebas_new"/>
+	
+	
+	
+	<macrodef name = "git">
+	    <attribute name = "command" />
+	    <attribute name = "dir" default = "" />
+	    <element name = "args" optional = "true" />
+	    <sequential>
+	        <echo message = "git command : @{command}" />
+	    	<echo message = "dir : @{dir}" />
+	    	
+	        <exec executable = "git" dir = "@{dir}">
+	            <arg value = "@{command}" />
+	            <args/>
+	        </exec>
+	        
+	    </sequential>
+	</macrodef>
+	
+
+	
+	
+	<target name="ini" depends="download_git_old, download_git_new">
+	</target>
+	
+	<!-- Descargar repositorios desde git desde la rama master del tag de última release-->
+	<target name="download_git_old">
+		
+		<for param="componente" list="${componentList}" delimiter=";">
+		    <sequential>
+		    	
+		    	
+		    	<delete dir="${git.old.folder.prueba}/@{componente}"/>
+		    	<mkdir  dir="${git.old.folder.prueba}/@{componente}"/>
+		    	
+		    	<git command = "clone" dir="${git.old.folder.prueba}">
+    			    <args>
+    			        <arg value = "https://${git.username}:${git.password}@github.com/vector-mw/@{componente}.git" />
+    			    </args>
+    			</git>
+		    	
+		    	
+		    	<git command = "checkout"  dir="${git.old.folder.prueba}/@{componente}">
+    			    <args>
+    			        <arg value = "1178bddde2716b4bee7264f984d06186e7f87d71" />
+    			    </args>
+    			</git>
+		    	
+		    
+		    </sequential>
+		</for>
+		
+	</target>
+	
+	<!-- Descargar repositorios desde git desde la rama master contenido actual tras el merge-->
+	<target name="download_git_new">
+			
+			<for param="componente" list="${componentList}" delimiter=";">
+			    <sequential>
+			    	
+			    	<git command = "clone">
+	    			    <args>
+	    			        <arg value = "https://${git.username}:${git.password}@github.com/vector-mw/@{componente}.git" />
+	    			        <arg value = "${git.new.folder.prueba}/@{componente}" />
+	    			    </args>
+	    			</git>
+			    	
+			    	
+			    	
+			    
+			    </sequential>
+			</for>
+			
+		</target>
+
+	<target name="pruebaMacrodef">
+		
+		<macrodef name="testing">
+		   <attribute name="v" default="NOT SET"/>
+		   <element name="some-tasks" optional="yes"/>
+		   <sequential>
+		      <echo>v is @{v}</echo>
+		      <some-tasks/>
+		   </sequential>
+		</macrodef>
+
+		<testing v="This is v">
+		   <some-tasks>
+		      <echo>this is a test</echo>
+		   </some-tasks>
+		</testing>
+	
+	</target>
+	
+	
+	
+	
+	
+	
+	
+</project>
