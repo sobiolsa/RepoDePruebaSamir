@@ -78,7 +78,7 @@
 			    	<delete dir="${git.new.folder.prueba}/@{componente}"/>
 			    	<mkdir  dir="${git.new.folder.prueba}/@{componente}"/>
 			    	
-			    	<git command = "clone" dir="${git.new.folder.prueba}/@{componente}">
+			    	<git command = "clone" dir="${git.new.folder.prueba}">
 	    			    <args>
 	    			        <arg value = "https://${git.username}:${git.password}@github.com/vector-mw/@{componente}.git" />
 	    			    </args>
