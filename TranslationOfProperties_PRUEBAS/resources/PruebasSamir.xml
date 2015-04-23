@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="pruebas.samir" default="ini" basedir=".">
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="./lib/ant-contrib-0.6.jar" />
+		</classpath>
+	</taskdef>
+	
+	
+	<property file=".\Ant_ExtractDesdeGit.properties" />
+	<property environment="env"/>
+	
+	
+	
+	<!-- Envío de comandos git a la consola -->
+	<macrodef name = "git">
+	    <attribute name = "command" />
+	    <attribute name = "dir" default = "" />
+	    <element name = "args" optional = "true" />
+	    <sequential>
+	        <echo message = "git command : @{command}" />
+	    	<echo message = "dir : @{dir}" />
+	    	
+	        <exec executable = "git" dir = "@{dir}">
+	            <arg value = "@{command}" />
+	            <args/>
+	        </exec>
+	        
+	    </sequential>
+	</macrodef>
+	
+	<macrodef name = "git-init">
+		<attribute name = "repository" />
+		<sequential>
+			<echo message = "repository : @{repository}" />
+			<git command = "init">
+				<args>
+					<arg value = "@{repository}" />
+				</args>
+			</git>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name = "git-add">
+		<attribute name = "path" />
+		<attribute name = "target" />
+		<sequential>
+			<git command = "add" dir="@{path}">
+				<args>
+					<arg value = "@{target}" /> 
+				</args>
+			</git>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name = "git-commit">
+		<attribute name = "path" />
+		<attribute name = "message" />
+		<sequential>
+			<git command="commit" dir="@{path}">
+				<args>
+					<arg value= "@{message}" />
+				</args>
+			</git>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name = "git-remote-add">
+		<attribute name = "path" />
+		<attribute name = "branch" />
+		<attribute name = "repository" />
+		<sequential>
+			<echo file="DUMP" message="branch: @{branch} repos: @{repository}"/>
+			<git command = "remote"  dir="@{path}">
+				<args>
+					<arg value = "add" />
+					<arg value = "@{branch}" />
+					<arg value = "@{repository}" />
+				</args>
+			</git>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name = "git-push">
+		<attribute name = "path" />
+		<attribute name = "branch" />
+		<attribute name = "head" />
+		<sequential>
+			<git command = "push" dir="@{path}">
+				<args>
+					<arg value = "@{branch}" />
+					<arg value = "@{head}" />
+				</args>
+			</git>
+		</sequential>
+	</macrodef>
+
+	 <!--   Basic Example of using makeDirDiff Ant task   -->
+    <target name="ini">
+       
+    	<property name="project.name" value="../PruebaSamir"/>
+    	
+    	<git-init repository="${project.name}" />
+    	
+    	<echo file="${project.name}/test.txt">escribir esto en el fichero...</echo>
+    	
+    	
+    	<git-add path="${project.name}" target="test.txt" />
+    	
+    	
+    	<!--
+    	<git-commit path="${project.name}" message="-m I made a commit" />
+    	
+    	
+    	<git-remote-add path="${project.name}"  
+    				branch="origin" repository="https://${git.username}:${git.password}@git hub.com/vector-mw/RigelGenerateDelivery.git" />
+    	
+    	
+    	<git-push branch="origin" head="+master" path="${project.name}" />
+    	
+    	-->
+    	
+    	
+    </target>
+	
+	
+
+	
+</project>
