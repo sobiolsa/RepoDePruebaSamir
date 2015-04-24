@@ -104,26 +104,45 @@
     	
     	<git-init repository="${project.name}" />
     	
-    	<echo file="${project.name}/test.txt">escribir esto en el fichero...</echo>
+    	
+    	<echo file="${project.name}/test.txt">escribir esto en el fichero 3...</echo>
     	
     	
     	<git-add path="${project.name}" target="test.txt" />
     	
     	
+    	
+    	<git-commit path="${project.name}" message="-m Haciendo commit desde el ant" />
+    	
     	<!--
-    	<git-commit path="${project.name}" message="-m I made a commit" />
-    	
-    	
     	<git-remote-add path="${project.name}"  
-    				branch="origin" repository="https://${git.username}:${git.password}@git hub.com/vector-mw/RigelGenerateDelivery.git" />
-    	
-    	
-    	<git-push branch="origin" head="+master" path="${project.name}" />
-    	
+    				branch="origin" repository="https://github.com/sobiolsa/RepoDePruebaSamir.git" />
     	-->
     	
     	
+    	<git-push branch="origin" head="master" path="${project.name}" />
+    	
+    	
+    	
     </target>
+	
+	<target name="setUpE">
+			<property name="project.name" value="../../../RepoDePruebaSamir"/>
+			<git-init repository="${project.name}" />
+			<echo file="${project.name}/test.txt">Hello World 1</echo>
+			<git-add path="${project.name}" target="test.txt" />
+			<git-commit path="${project.name}" message="-m I made a commit" />
+		
+		<!--
+		<git-remote-add path="${project.name}" 
+				branch="origin" repository="https://github.com/sobiolsa/RepoDePruebaSamir.git" />
+		-->
+		
+		
+
+			<git-push branch="origin" head="+master" path="${project.name}" />
+	    </target>
+
 	
 	
 
