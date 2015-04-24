@@ -53,13 +53,11 @@
 	<macrodef name = "git-commit">
 		<attribute name = "path" />
 		<attribute name = "message" />
-		<attribute name = "author" />
 		
 		<sequential>
 			<git command="commit" dir="@{path}">
 				<args>
 					<arg value= "@{message}" />
-					<arg value= "@{author}" />
 				</args>
 			</git>
 		</sequential>
@@ -70,7 +68,6 @@
 		<attribute name = "branch" />
 		<attribute name = "repository" />
 		<sequential>
-			<echo file="DUMP" message="branch: @{branch} repos: @{repository}"/>
 			<git command = "remote"  dir="@{path}">
 				<args>
 					<arg value = "add" />
@@ -106,9 +103,8 @@
 		
 		<property name="project.name" value="../RepoDePruebaSamir"/>
 		
-			<echo file="${project.name}/test.txt">Hello World 17</echo>
-			<git-add path="${project.name}" target="test.txt" />
-			<git-commit path="${project.name}" message="-m I made a commit desde ant 17" author="--author=xIS12157" />
+			<echo file="${project.name}/test.txt">Hello World CASA</echo>
+			<git-commit path="${project.name}" message="-am I made a commit desde ant 17"/>
 		
 		<!--
 		<git-remote-add path="${project.name}" 
