@@ -23,7 +23,7 @@
  
 	<target name="version" description="Commits all changes to version git">
 		
-		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde casa 2"/>
+		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde casa 3"/>
 		
 		<echo file="test.txt">${commit-message}</echo>
 
@@ -37,6 +37,10 @@
 				<arg value="-m ${commit-message}" />
 			</args>
 		</git>
-		<git command="push" />
+		<git command="push">
+			<args>
+				<arg value="https://sobiolsa:gitSamir9@github.com/sobiolsa/RepoDePruebaSamir.git" />
+			</args>
+		</git>
 	</target>
 </project>
