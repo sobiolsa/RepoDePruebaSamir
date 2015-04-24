@@ -23,9 +23,9 @@
  
 	<target name="version" description="Commits all changes to version git">
 		
-		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde casa"/>
+		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde casa 2"/>
 		
-		<echo file="${project.name}/test.txt">${commit-message}</echo>
+		<echo file="test.txt">${commit-message}</echo>
 
 		<git command="add">
 			<args>
