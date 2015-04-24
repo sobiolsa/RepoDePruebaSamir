@@ -79,9 +79,10 @@
 	</macrodef>
 	
 	<macrodef name = "git-push">
+		<attribute name = "path" />
 		<attribute name = "repo" />
 		<sequential>
-			<git command = "push">
+			<git command = "push" dir="@{path}">
 				<args>
 					<arg value = "repo" />
 				</args>
@@ -98,15 +99,15 @@
 		
 		<property name="project.name" value="../RepoDePruebaSamir"/>
 		
-			<echo file="${project.name}/test.txt">Hello World CASA 22</echo>
-			<git-commit path="${project.name}" message="-am I made a commit desde ant 17"/>
+			<echo file="${project.name}/test.txt">Hello World CASA 222</echo>
+			<git-commit path="${project.name}" message="-am I made a commit desde ant 222"/>
 		
 		<!--
 		<git-remote-add path="${project.name}" 
 				branch="origin" repository="https://github.com/sobiolsa/RepoDePruebaSamir.git" />
 		-->
 
-		<git-push repo="https://sobiolsa:gitSamir9@github.com/sobiolsa/RepoDePruebaSamir.git"/>
+		<git-push path="${project.name}" repo="https://sobiolsa:gitSamir9@github.com/sobiolsa/RepoDePruebaSamir.git"/>
 		
 		
 	  </target>
