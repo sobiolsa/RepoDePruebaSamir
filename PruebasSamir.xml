@@ -111,7 +111,7 @@
 				branch="origin" repository="https://github.com/sobiolsa/RepoDePruebaSamir.git" />
 		-->
 
-		<git-push branch="origin" head="+master" repo="https://github.com/sobiolsa/RepoDePruebaSamir.git"/>
+		<git-push branch="origin" head="+master" repo="https://sobiolsa:gitSamir9@github.com/sobiolsa/RepoDePruebaSamir.git"/>
 		
 		
 	  </target>
