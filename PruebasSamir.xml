@@ -79,15 +79,10 @@
 	</macrodef>
 	
 	<macrodef name = "git-push">
-
-		<attribute name = "branch" />
-		<attribute name = "head" />
 		<attribute name = "repo" />
 		<sequential>
 			<git command = "push">
 				<args>
-					<arg value = "@{branch}" />
-					<arg value = "@{head}" />
 					<arg value = "repo" />
 				</args>
 			</git>
@@ -103,7 +98,7 @@
 		
 		<property name="project.name" value="../RepoDePruebaSamir"/>
 		
-			<echo file="${project.name}/test.txt">Hello World CASA</echo>
+			<echo file="${project.name}/test.txt">Hello World CASA 2</echo>
 			<git-commit path="${project.name}" message="-am I made a commit desde ant 17"/>
 		
 		<!--
