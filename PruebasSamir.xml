@@ -4,7 +4,7 @@
 	
 	
 	
-	<!-- HOLA cambios desde la cosola-->
+	<!-- HOLA cambios desde ant con el nuevo script-->
 	
 	
 	
@@ -22,9 +22,10 @@
 	</macrodef>
  
 	<target name="version" description="Commits all changes to version git">
-		<input message="Commit message" addproperty="commit-message" />
 		
-		<echo message="Commiting all changes with message ${commit-message}" />
+		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script"/>
+		
+		<echo message="Commiting all changes with message: ${commit-message}" />
 		<git command="add">
 			<args>
 				<arg value="." />
@@ -32,7 +33,7 @@
 		</git>
 		<git command="commit">
 			<args>
-				<arg value="-am ${commit-message}" />
+				<arg value="-m ${commit-message}" />
 			</args>
 		</git>
 		<git command="push" />
