@@ -23,7 +23,7 @@
  
 	<target name="version" description="Commits all changes to version git">
 		
-		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde casa 3"/>
+		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde casa 4"/>
 		
 		<echo file="test.txt">${commit-message}</echo>
 
@@ -34,7 +34,7 @@
 		</git>
 		<git command="commit">
 			<args>
-				<arg value="-m ${commit-message}" />
+				<arg value="-am ${commit-message}" />
 			</args>
 		</git>
 		<git command="push">
