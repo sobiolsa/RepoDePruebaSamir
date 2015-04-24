@@ -98,7 +98,7 @@
 		
 		<property name="project.name" value="../RepoDePruebaSamir"/>
 		
-			<echo file="${project.name}/test.txt">Hello World CASA 2</echo>
+			<echo file="${project.name}/test.txt">Hello World CASA 22</echo>
 			<git-commit path="${project.name}" message="-am I made a commit desde ant 17"/>
 		
 		<!--
@@ -106,7 +106,7 @@
 				branch="origin" repository="https://github.com/sobiolsa/RepoDePruebaSamir.git" />
 		-->
 
-		<git-push branch="origin" head="+master" repo="https://sobiolsa:gitSamir9@github.com/sobiolsa/RepoDePruebaSamir.git"/>
+		<git-push repo="https://sobiolsa:gitSamir9@github.com/sobiolsa/RepoDePruebaSamir.git"/>
 		
 		
 	  </target>
