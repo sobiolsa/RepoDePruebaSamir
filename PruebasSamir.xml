@@ -1,119 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<project name="pruebas.samir" default="ini" basedir=".">
-
-	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
-		<classpath>
-			<pathelement location="./lib/ant-contrib-0.6.jar" />
-		</classpath>
-	</taskdef>	
+<?xml version="1.0"?>
+<project name="Demo" default="version" basedir=".">
 	
 	
-	<!-- Envío de comandos git a la consola -->
-	<macrodef name = "git">
-	    <attribute name = "command" />
-	    <attribute name = "dir" default = "" />
-	    <element name = "args" optional = "true" />
-	    <sequential>
-	        <echo message = "git command : @{command}" />
-	    	<echo message = "dir : @{dir}" />
-	    	
-	        <exec executable = "git" dir = "@{dir}">
-	            <arg value = "@{command}" />
-	            <args/>
-	        </exec>
-	        
-	    </sequential>
-	</macrodef>
 	
-	<macrodef name = "git-init">
-		<attribute name = "repository" />
+	
+	<!-- HOLA cambios desde ant con el nuevo script-->
+	
+	
+	
+	<macrodef name="git">
+		<attribute name="command" />
+		<attribute name="dir" default="" />
+		<element name="args" optional="true" />
 		<sequential>
-			<echo message = "repository : @{repository}" />
-			<git command = "init">
-				<args>
-					<arg value = "@{repository}" />
-				</args>
-			</git>
+			<echo message="git @{command}" />
+			<exec executable="git" dir="@{dir}">
+				<arg value="@{command}" />
+				<args/>
+			</exec>
 		</sequential>
 	</macrodef>
-	
-	<macrodef name = "git-add">
-		<attribute name = "path" />
-		<attribute name = "target" />
-		<sequential>
-			<git command = "add" dir="@{path}">
-				<args>
-					<arg value = "@{target}" /> 
-				</args>
-			</git>
-		</sequential>
-	</macrodef>
-	
-	<macrodef name = "git-commit">
-		<attribute name = "path" />
-		<attribute name = "message" />
+ 
+	<target name="version" description="Commits all changes to version git">
 		
-		<sequential>
-			<git command="commit" dir="@{path}">
-				<args>
-					<arg value= "@{message}" />
-				</args>
-			</git>
-		</sequential>
-	</macrodef>
-	
-	<macrodef name = "git-remote-add">
-		<attribute name = "path" />
-		<attribute name = "branch" />
-		<attribute name = "repository" />
-		<sequential>
-			<git command = "remote"  dir="@{path}">
-				<args>
-					<arg value = "add" />
-					<arg value = "@{branch}" />
-					<arg value = "@{repository}" />
-				</args>
-			</git>
-		</sequential>
-	</macrodef>
-	
-	<macrodef name = "git-push">
-		<attribute name = "path" />
-		<attribute name = "repo" />
-		<sequential>
-			<git command = "push" dir="@{path}">
-				<args>
-					<arg value = "repo" />
-				</args>
-			</git>
-		</sequential>
-	</macrodef>
+		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde casa"/>
+		
+		<echo file="${project.name}/test.txt">${commit-message}</echo>
 
-	
-    <target name="ini">
-    	
-    </target>
-	
-	<target name="setUpE">
-		
-		<property name="project.name" value="../RepoDePruebaSamir"/>
-		
-			<echo file="${project.name}/test.txt">Hello World CASA 222</echo>
-			<git-commit path="${project.name}" message="-am I made a commit desde ant 222"/>
-		
-		<!--
-		<git-remote-add path="${project.name}" 
-				branch="origin" repository="https://github.com/sobiolsa/RepoDePruebaSamir.git" />
-		-->
-
-		<git-push path="${project.name}" repo="https://sobiolsa:gitSamir9@github.com/sobiolsa/RepoDePruebaSamir.git"/>
-		
-		
-	  </target>
-
-	
-	
-
-	
+		<git command="add">
+			<args>
+				<arg value="." />
+			</args>
+		</git>
+		<git command="commit">
+			<args>
+				<arg value="-m ${commit-message}" />
+			</args>
+		</git>
+		<git command="push" />
+	</target>
 </project>
