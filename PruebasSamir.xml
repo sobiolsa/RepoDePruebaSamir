@@ -23,7 +23,7 @@
  
 	<target name="version" description="Commits all changes to version git">
 		
-		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde casa 4"/>
+		<property name="commit-message" value="HOLA cambios desde ant con el nuevo script desde el curro!! "/>
 		
 		<echo file="test.txt">${commit-message}</echo>
 
